@@ -302,9 +302,9 @@ public class ListaFavoritasUITest {
 
     }
 
-    /**
+
     @Test
-    public void consultarGasolineraFavoritaTest() {
+    public void consultarGasolineraFavoritaTest(){
         // Anhadimos a los filtros Cantabria
         onView(withId(R.id.btnAccederFiltrosPermanentes)).perform(scrollTo(), click());
         // Selecciono en el spinner de la comunidad: Cantabria
@@ -326,7 +326,7 @@ public class ListaFavoritasUITest {
         String direccion2 = "CR N-629 79,7";
         DataInteraction gas2;
         gas2 = onData(CoreMatchers.anything()).inAdapterView(withId(R.id.lvGasolineras)).atPosition(1);
-        gas2.onChildView(withId(R.id.tvAddress)).check(matches(withText(direccion1)));
+        gas2.onChildView(withId(R.id.tvAddress)).check(matches(withText(direccion2)));
         onData(anything()).inAdapterView(withId(R.id.lvGasolineras)).atPosition(1).perform(scrollTo(), click());
         onView(withId(R.id.btnAnhadirGasolineraFavoritas)).perform(scrollTo(), click());
 
@@ -342,34 +342,35 @@ public class ListaFavoritasUITest {
         }
 
         onView(withId(R.id.btnAccederFavoritos)).perform(click());
-        onView(withId(R.id.lvGasolineras)).check(matches(sizeElements(2)));
+        onView(withId(R.id.lvGasolineras2)).check(matches(sizeElements(2)));
         DataInteraction fav1;
         String precioGas = "1,859";
         String precioDies = "1,999";
-        fav1 = onData(CoreMatchers.anything()).inAdapterView(withId(R.id.lvGasolineras)).atPosition(0);
+        fav1 = onData(CoreMatchers.anything()).inAdapterView(withId(R.id.lvGasolineras2)).atPosition(1);
         fav1.onChildView(withId(R.id.tvAddress)).check(matches(withText(direccion1)));
         fav1.onChildView(withId(R.id.tv95)).check(matches(withText(precioGas)));
         fav1.onChildView(withId(R.id.tvDieselA)).check(matches(withText(precioDies)));
-        onData(anything()).inAdapterView(withId(R.id.lvGasolineras)).atPosition(0).perform(scrollTo(), click());
-        onView(withId(R.id.tvGasolina)).check(matches(withText("Gasolina95: " + "1,85€")));
-        onView(withId(R.id.tvDiesel)).check(matches(withText("DiéselA: " + "1,99€")));
+        onData(anything()).inAdapterView(withId(R.id.lvGasolineras2)).atPosition(1).perform(scrollTo(), click());
+        onView(withId(R.id.tvGasolina)).check(matches(withText("Gasolina95: 1,85 €")));
+        onView(withId(R.id.tvDiesel)).check(matches(withText("DiéselA: 1,99 €")));
         double diesel = Double.parseDouble(precioDies.replace(",", "."));
         double gasolina = Double.parseDouble(precioGas.replace(",", "."));
-        onView(withId(R.id.tvMedia)).check(matches(withText("Media: " + String.valueOf((2 * diesel + gasolina) / 3).replace(".", ",").substring(0, 4) + " €")));
+        onView(withId(R.id.tvMedia)).check(matches(withText("Media: " + String.valueOf((diesel + 2 * gasolina) / 3).replace(".", ",").substring(0, 4) + " €")));
         Espresso.pressBack();
 
-        DataInteraction fav2 = onData(CoreMatchers.anything()).inAdapterView(withId(R.id.lvGasolineras)).atPosition(1);
+        DataInteraction fav2 = onData(CoreMatchers.anything()).inAdapterView(withId(R.id.lvGasolineras2)).atPosition(0);
         precioDies = "2,009";
         precioGas = "1,819";
-        fav2.onChildView(withId(R.id.tvAddress)).check(matches(withText(direccion1)));
+        fav2.onChildView(withId(R.id.tvAddress)).check(matches(withText(direccion2)));
         fav2.onChildView(withId(R.id.tv95)).check(matches(withText(precioGas)));
         fav2.onChildView(withId(R.id.tvDieselA)).check(matches(withText(precioDies)));
-        onData(anything()).inAdapterView(withId(R.id.lvGasolineras)).atPosition(1).perform(scrollTo(), click());
-        onView(withId(R.id.tvGasolina)).check(matches(withText("Gasolina95: " + "1,81€")));
-        onView(withId(R.id.tvDiesel)).check(matches(withText("DiéselA: " + "2,09€")));
+        onData(anything()).inAdapterView(withId(R.id.lvGasolineras2)).atPosition(0).perform(scrollTo(), click());
+        onView(withId(R.id.tvGasolina)).check(matches(withText("Gasolina95: 1,81 €")));
+        onView(withId(R.id.tvDiesel)).check(matches(withText("DiéselA: 2,00 €")));
         diesel = Double.parseDouble(precioDies.replace(",", "."));
         gasolina = Double.parseDouble(precioGas.replace(",", "."));
-        onView(withId(R.id.tvMedia)).check(matches(withText("Media: " + String.valueOf((2 * diesel + gasolina) / 3).replace(".", ",").substring(0, 4) + " €")));
+        onView(withId(R.id.tvMedia)).check(matches(withText("Media: " + String.valueOf((diesel + 2 * gasolina) / 3).replace(".", ",").substring(0, 4) + " €")));
+
     }
-    */
+
 }
