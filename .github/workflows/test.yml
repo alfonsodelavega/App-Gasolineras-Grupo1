@@ -62,7 +62,9 @@ jobs:
               uses: actions/upload-artifact@v2
               with:
                 name: ui-tests-artifacts
-                path: ./AndroidProject/app/build/reports/androidTests/connected/
+                path: |
+                  ./AndroidProject/app/build/reports/androidTests/connected/
+                  ./AndroidProject/app/build/outputs/androidTest-results/connected/
                 
     # android-release-apk:
         # needs: [android-unit-tests, android-integration-tests]
