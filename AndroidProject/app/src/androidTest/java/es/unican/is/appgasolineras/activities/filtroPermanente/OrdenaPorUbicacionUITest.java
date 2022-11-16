@@ -48,9 +48,6 @@ public class OrdenaPorUbicacionUITest {
     public ActivityScenarioRule<MenuPrincipalView> activityRule =
             new ActivityScenarioRule(MenuPrincipalView.class);
 
-    @Rule
-    public GrantPermissionRule permissionRule = GrantPermissionRule.grant(android.Manifest.permission.ACCESS_FINE_LOCATION);
-
     @Test
     public void guardarFiltrosTest() {
         //PRUEBA: Exito con todos los filtros
